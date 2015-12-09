@@ -27,7 +27,7 @@ final class NotBeforeValidator implements Validator
      */
     public function validate(Token $token)
     {
-        if (null === $notBefore = $token->notBefore()) {
+        if (null === $token->notBefore()) {
             throw new MissingClaim(Token::CLAIM_NBF, $token);
         }
 
