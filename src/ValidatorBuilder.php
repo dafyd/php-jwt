@@ -4,7 +4,9 @@ namespace Zenstruck\JWT;
 
 use Zenstruck\JWT\Validator\AudienceValidator;
 use Zenstruck\JWT\Validator\ChainValidator;
+use Zenstruck\JWT\Validator\ExpectedClaimValidator;
 use Zenstruck\JWT\Validator\ExpiresAtValidator;
+use Zenstruck\JWT\Validator\HasClaimValidator;
 use Zenstruck\JWT\Validator\IdValidator;
 use Zenstruck\JWT\Validator\IssuedAtValidator;
 use Zenstruck\JWT\Validator\IssuerValidator;
@@ -46,6 +48,27 @@ final class ValidatorBuilder
         $this->validators[] = $validator;
 
         return $this;
+    }
+
+    /**
+     * @param string $claim
+     *
+     * @return self
+     */
+    public function has($claim)
+    {
+        return $this->add(new HasClaimValidator($claim));
+    }
+
+    /**
+     * @param string $claim
+     * @param mixed  $expected
+     *
+     * @return self
+     */
+    public function expect($claim, $expected)
+    {
+        return $this->add(new ExpectedClaimValidator($claim, $expected));
     }
 
     /**

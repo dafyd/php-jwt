@@ -10,10 +10,10 @@ use Zenstruck\JWT\Token;
 final class IdValidator extends ExpectedClaimValidator
 {
     /**
-     * {@inheritdoc}
+     * @param mixed $expected
      */
-    protected function claim()
+    public function __construct($expected)
     {
-        return Token::CLAIM_JTI;
+        parent::__construct(Token::CLAIM_JTI, $expected);
     }
 }

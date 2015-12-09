@@ -10,10 +10,10 @@ use Zenstruck\JWT\Token;
 final class AudienceValidator extends ExpectedClaimValidator
 {
     /**
-     * {@inheritdoc}
+     * @param mixed $expected
      */
-    protected function claim()
+    public function __construct($expected)
     {
-        return Token::CLAIM_AUD;
+        parent::__construct(Token::CLAIM_AUD, $expected);
     }
 }

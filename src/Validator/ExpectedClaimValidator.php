@@ -3,44 +3,38 @@
 namespace Zenstruck\JWT\Validator;
 
 use Zenstruck\JWT\Exception\Validation\ClaimMismatch;
-use Zenstruck\JWT\Exception\Validation\MissingClaim;
 use Zenstruck\JWT\Token;
 use Zenstruck\JWT\Validator;
 
 /**
  * @author Kevin Bond <kevinbond@gmail.com>
  */
-abstract class ExpectedClaimValidator implements Validator
+class ExpectedClaimValidator implements Validator
 {
+    private $claim;
     private $expected;
 
     /**
-     * @param mixed $expected
+     * @param string $claim
+     * @param mixed  $expected
      */
-    public function __construct($expected)
+    public function __construct($claim, $expected)
     {
+        $this->claim = $claim;
         $this->expected = $expected;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function validate(Token $token)
+    final public function validate(Token $token)
     {
-        $claim = $this->claim();
-        $actual = $token->get($claim);
+        (new HasClaimValidator($this->claim))->validate($token);
 
-        if (null === $actual) {
-            throw new MissingClaim($claim, $token);
-        }
+        $actual = $token->get($this->claim);
 
         if ($this->expected !== $actual) {
-            throw new ClaimMismatch($claim, $actual, $this->expected, $token);
+            throw new ClaimMismatch($this->claim, $actual, $this->expected, $token);
         }
     }
-
-    /**
-     * @return string
-     */
-    abstract protected function claim();
 }
