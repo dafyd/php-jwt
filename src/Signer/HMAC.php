@@ -29,7 +29,7 @@ abstract class HMAC implements Signer
 
         $signedInput = $this->sign($input, $key);
 
-        return hash_equals($signature, $signedInput);
+        return hash_equals($signedInput, $signature);
     }
 
     /**
