@@ -3,12 +3,12 @@
 namespace Zenstruck\JWT\Tests\Signer\OpenSSL\ECDSA;
 
 use Zenstruck\JWT\Signer\OpenSSL\ECDSA\ES256;
-use Zenstruck\JWT\Tests\SignerTest;
+use Zenstruck\JWT\Tests\Signer\OpenSSL\ECDSATest;
 
 /**
  * @author Kevin Bond <kevinbond@gmail.com>
  */
-class ES256Test extends SignerTest
+class ES256Test extends ECDSATest
 {
     protected function createSigner()
     {
