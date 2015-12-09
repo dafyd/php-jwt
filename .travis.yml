@@ -1,25 +1,30 @@
 language: php
 
 php:
-    - 5.4
-    - 5.5
-    - 5.6
-    - 7.0
-    - hhvm
+  - 5.4
+  - 5.5
+  - 5.6
+  - 7.0
+  - hhvm
 
-before_script:
-    - curl -s http://getcomposer.org/installer | php
-    - php composer.phar install --dev --no-interaction
+sudo: false
 
-phpunit: php vendor/bin/phpunit --prefer-dist --dev
-
-script:
-    - mkdir -p build/logs
-    - php vendor/bin/phpunit -c phpunit.xml.dist --coverage-clover ./build/logs/clover.xml
-
-after_script:
-    - php vendor/bin/coveralls -v
+cache:
+  directories:
+    - $HOME/.composer/cache/files
 
 matrix:
-  allow_failures:
-    - php: hhvm
+  include:
+    - php: 5.4
+      env: COMPOSER_FLAGS="--prefer-lowest"
+
+before_install:
+  - composer self-update
+
+install: composer update --prefer-source $COMPOSER_FLAGS
+
+script: phpunit --coverage-clover=coverage.clover
+
+after_script:
+  - wget https://scrutinizer-ci.com/ocular.phar
+  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover

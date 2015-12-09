@@ -1,6 +1,8 @@
 The MIT License
 
-Copyright (c) 2014 Alessandro Nadalin
+Copyright for portions of project "zenstruck\php-jwt" are held by
+Alessandro Nadalin, 2014 as part of project "namshi/jose". All other
+copyright for project "zenstruck\php-jwt" are held by Kevin Bond, 2015.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
