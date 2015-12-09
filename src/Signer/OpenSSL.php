@@ -54,9 +54,13 @@ abstract class OpenSSL implements Signer
             $key = new PublicKey($key);
         }
 
-        $this->verifyType($key);
+        $result = openssl_verify($input, $signature, $key->get(), $this->hashingAlgorithm());
 
-        return (bool) openssl_verify($input, $signature, $key->get(), $this->hashingAlgorithm());
+        if (-1 === $result) {
+            throw new \RuntimeException('Unknown error during verification.');
+        }
+
+        return (bool) $result;
     }
 
     /**
