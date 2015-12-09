@@ -35,7 +35,7 @@ class ValidationBuilderTest extends \PHPUnit_Framework_TestCase
             new IssuedAtValidator($time->getTimestamp()),
             new IdValidator('foo'),
             new HasClaimValidator('custom1'),
-            new ExpectedClaimValidator('custom1', 'foo')
+            new ExpectedClaimValidator('custom1', 'foo'),
         ]);
 
         $validator2 = (new ValidatorBuilder())
