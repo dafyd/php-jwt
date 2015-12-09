@@ -11,14 +11,13 @@ final class MalformedToken extends \InvalidArgumentException implements Exceptio
 
     /**
      * @param mixed           $token
-     * @param string          $message
      * @param \Exception|null $previous
      */
-    public function __construct($token, $message = 'Malformed token.', \Exception $previous = null)
+    public function __construct($token, \Exception $previous = null)
     {
         $this->token = $token;
 
-        parent::__construct($message, 0, $previous);
+        parent::__construct('Malformed token.', 0, $previous);
     }
 
     /**
