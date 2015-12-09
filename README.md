@@ -65,7 +65,7 @@ specification. This library is a fork of [namshi/jose](https://github.com/namshi
     use Zenstruck\JWT\Exception\Validation\ExpiredToken;
     use Zenstruck\JWT\Exception\ValidationFailed;
 
-    $encodedTokenFromUser = // ...fetched user
+    $encodedTokenFromUser = // ...fetched from user
 
     try {
         $decodedToken = Token::fromString($encodedTokenFromUser);
@@ -135,16 +135,16 @@ $token->verify($signer, 'my secret key'); // verified
 $token->verify($signer, 'invalid secret key'); // unverified - exception thrown
 ```
 
-### OpenSSL (RSA/ECDSA)
+### RSA/ECDSA (OpenSSL)
 
 These signers require a private key for signing and a public key for verifying.
 
-* **PrivateKey**: a `string` (key contents or filename), `resource`, instance of
+* **PrivateKey**: a `string` (key contents or filename), `resource` or instance of
   `Zenstruck\JWT\Signer\OpenSSL\PrivateKey`
-* **PublicKey**: a `string` (key contents or filename), `resource`, instance of
+* **PublicKey**: a `string` (key contents or filename), `resource` or instance of
   `Zenstruck\JWT\Signer\OpenSSL\PublicKey`
 * **Keychain**: instance of `Zenstruck\JWT\Signer\OpenSSL\Keychain` contains both a public and private key.
-  Can be passed to `Signer::sign()` and `Signer::verify()`.
+  Can be passed as the key to both `Signer::sign()` and `Signer::verify()`.
 
 | Algorithm | Signer Class                               |
 | --------- | ------------------------------------------ |
