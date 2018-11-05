@@ -13,6 +13,7 @@ final class Token
 {
     const HEADER_TYP = 'typ';
     const HEADER_ALG = 'alg';
+    const HEADER_KID = 'kid';
 
     const CLAIM_ISS = 'iss';
     const CLAIM_SUB = 'sub';
@@ -150,6 +151,14 @@ final class Token
     public function algorithm()
     {
         return strtoupper($this->getHeader(self::HEADER_ALG, 'NONE'));
+    }
+
+    /**
+     * @return string|null
+     */
+    public function keyId()
+    {
+        return $this->getHeader(self::HEADER_KID);
     }
 
     /**

@@ -24,6 +24,29 @@ final class TokenBuilder
     }
 
     /**
+     * @param string $key
+     * @param mixed  $value
+     *
+     * @return self
+     */
+    public function header($key, $value)
+    {
+        $this->headers[$key] = $value;
+
+        return $this;
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return self
+     */
+    public function keyId($value)
+    {
+        return $this->header(Token::HEADER_KID, $value);
+    }
+
+    /**
      * @param string $value
      *
      * @return self
